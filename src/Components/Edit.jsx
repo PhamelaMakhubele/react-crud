@@ -58,7 +58,7 @@ const Edit = ({ onEdit }) => {
           const response = await axios.put(`http://localhost:5000/members/${id}`, members);
           
           if (response.status === 200) {
-            onEdit(); // Notify the parent component about the edit
+            onEdit();
             alert('Member updated successfully');
           } else {
             alert('Failed to update member');
