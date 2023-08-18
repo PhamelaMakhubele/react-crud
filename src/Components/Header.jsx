@@ -3,10 +3,6 @@ import Button from './Button'
 //import { useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
-
-
-
-
 const Header = ({ onAdd}) => {
     const navigate = useNavigate()
     const HandleAdd= () => navigate("/Add", {replace: true} )
@@ -16,7 +12,7 @@ const Header = ({ onAdd}) => {
     
     <div >
       
-            <Button onClick={HandleAdd}  />
+      <Button onClick={HandleAdd}  />
         
 
 

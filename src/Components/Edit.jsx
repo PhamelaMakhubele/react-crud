@@ -2,16 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import Button from './Button';
 import { useParams } from 'react-router-dom';
-import BackArrow from './BackArrow';
+import BackArrow from './BackArrow'; 
 import axios from 'axios';
 
 const Edit = ({ onEdit }) => {
-  /*const [Image, setImage] = useState(); // Initialize to null
-  const [FullName, setFullName] = useState('');
-  const [Title, setTitle] = useState('');*/
   
   const { id } = useParams();
- 
   const [members, setMembers] =useState({
     id: '',
     Image: '',
@@ -19,27 +15,16 @@ const Edit = ({ onEdit }) => {
     Title: ''
   })
 
- 
- 
-
   
+
   const HandleChange = (e) =>{
     const data = new FileReader()
     const file = e.target.files[0]
     data.addEventListener('loadend', () =>{
-      setMembers({...members, Image:e.target.value.result})
+      setMembers({...members, Image:data.result})
     })
     data.readAsDataURL(file)
   }
-  
-  /*useEffect(() => {
-    axios.get(`http://localhost:5000/members/${id}` )
-      .then((res) => setMembers(res.members))
-      .catch((err) => {
-        console.log(err.message);
-      });
-      
-      }, [id])*/
 
       useEffect(() => {
         axios.get(`http://localhost:5000/members/${id}`)
@@ -58,7 +43,7 @@ const Edit = ({ onEdit }) => {
           const response = await axios.put(`http://localhost:5000/members/${id}`, members);
           
           if (response.status === 200) {
-            onEdit();
+            members();
             alert('Member updated successfully');
           } else {
             alert('Failed to update member');
@@ -82,9 +67,9 @@ const Edit = ({ onEdit }) => {
       <BackArrow />
       <form action="PUT" onSubmit={onSubmit}>
         <div className='image-circle'>
-        {members.Image ? (
+         {members.Image &&  (
           <img src={members.Image} alt='display' className='Image' />
-        ):null}
+        )}
         </div>
         <label htmlFor="fileInput" className='custom-file-input'>
          {members.Image ? '-' : '+'}
